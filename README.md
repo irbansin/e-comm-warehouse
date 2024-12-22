@@ -9,93 +9,74 @@ A sample E-Commerce Warehouse System
 # ER Diagram
 ```mermaid
 erDiagram
-    CUSTOMERS ||--o{ ORDERS : places
-    CUSTOMERS {
-        int customer_id PK
-        string first_name
-        string last_name
-        string email
-        string phone
-        text address
-        timestamp created_at
+    Categories {
+        string category_id PK
+        string category_name
     }
-    
-    PRODUCTS ||--o{ ORDER_ITEMS : contains
-    PRODUCTS ||--o{ INVENTORY : tracks
-    PRODUCTS {
-        int product_id PK
+    Customers {
+        string customer_id PK
+        string customer_name
+        string customer_email
+        string customer_city
+        string customer_state
+    }
+    Geolocation {
+        string geolocation_zip_code_prefix
+        float geolocation_lat
+        float geolocation_lng
+        string geolocation_city
+        string geolocation_state
+    }
+    OrderItems {
+        string order_id FK
+        string product_id FK
+        string seller_id FK
+        float price
+        float freight_value
+    }
+    OrderPayments {
+        string order_id FK
+        int payment_sequential
+        string payment_type
+        int payment_installments
+        float payment_value
+    }
+    Orders {
+        string order_id PK
+        string customer_id FK
+        string order_status
+        datetime order_purchase_timestamp
+        datetime order_approved_at
+    }
+    Products {
+        string product_id PK
+        string product_category FK
         string product_name
-        string sku
-        string category
-        decimal price
-        decimal weight
-        string dimensions
-        timestamp created_at
+        string product_description
+        float product_price
     }
-    
-    WAREHOUSES ||--o{ INVENTORY : stores
-    WAREHOUSES ||--o{ EMPLOYEES : employs
-    WAREHOUSES ||--o{ SHIPMENTS : dispatches
-    WAREHOUSES {
-        int warehouse_id PK
-        string warehouse_name
-        text location
-        int capacity
-        timestamp created_at
+    Reviews {
+        string review_id PK
+        string order_id FK
+        int review_score
+        string review_comment_title
+        string review_comment_message
     }
-    
-    INVENTORY {
-        int inventory_id PK
-        int product_id FK
-        int warehouse_id FK
-        int quantity
-        timestamp last_updated
+    Sellers {
+        string seller_id PK
+        string seller_name
+        string seller_city
+        string seller_state
     }
-    
-    ORDERS ||--|{ ORDER_ITEMS : contains
-    ORDERS ||--o{ SHIPMENTS : generates
-    ORDERS {
-        int order_id PK
-        int customer_id FK
-        timestamp order_date
-        enum status
-        decimal total_price
-    }
-    
-    ORDER_ITEMS {
-        int order_item_id PK
-        int order_id FK
-        int product_id FK
-        int quantity
-        decimal price
-    }
-    
-    EMPLOYEES {
-        int employee_id PK
-        string first_name
-        string last_name
-        string email
-        string phone
-        enum role
-        int warehouse_id FK
-        timestamp hire_date
-    }
-    
-    SHIPMENTS {
-        int shipment_id PK
-        int order_id FK
-        int warehouse_id FK
-        timestamp dispatch_date
-        timestamp delivery_date
-        enum status
-    }
-    
-    AUDIT {
-        int audit_id PK
-        string table_name
-        enum operation
-        string changed_by
-        timestamp timestamp
-        text details
-    }
+
+    Categories ||--o{ Products: "has"
+    Customers ||--o{ Orders: "places"
+    Orders ||--o{ OrderItems: "contains"
+    Orders ||--o{ OrderPayments: "has"
+    Products ||--o{ OrderItems: "is part of"
+    Sellers ||--o{ OrderItems: "provides"
+    Orders ||--o{ Reviews: "has"
+    Geolocation ||--o{ Customers: "located in"
+    Geolocation ||--o{ Sellers: "located in"
+
 ```
