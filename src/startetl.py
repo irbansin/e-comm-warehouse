@@ -12,9 +12,9 @@ load_dotenv()
 
 
 # Configuration
-AWS_ACCESS_KEY = "<your_aws_access_key>"
-AWS_SECRET_KEY = "<your_aws_secret_key>"
-S3_BUCKET_NAME = "<your_s3_bucket_name>"
+AWS_ACCESS_KEY = os.getenv("AWS_ACCESS_KEY")
+AWS_SECRET_KEY = os.getenv("AWS_SECRET_KEY")
+S3_BUCKET_NAME = os.getenv("S3_BUCKET_NAME")
 REDSHIFT_HOST = os.getenv("REDSHIFT_HOST")
 REDSHIFT_DB = os.getenv("REDSHIFT_DB")
 REDSHIFT_USER = os.getenv("REDSHIFT_USER")
