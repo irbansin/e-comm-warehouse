@@ -4,7 +4,6 @@ from flask import Flask, render_template, request, jsonify
 import os
 
 from etl_orchestrator import start_etl
-from startetl import startETL
 
 
 

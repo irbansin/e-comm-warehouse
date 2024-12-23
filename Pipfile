@@ -18,6 +18,7 @@ scikit-learn = "*"
 boto3 = "*"
 redshift-connector = "*"
 kagglehub = "*"
+python-dotenv = "*"
 
 [dev-packages]
 ipykernel = "*"
