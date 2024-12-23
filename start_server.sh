@@ -10,4 +10,4 @@ pipenv shell
 pipenv install
 
 echo "Starting Python server..."
-pipenv run python src/main.py  
+pipenv run python src/app.py  

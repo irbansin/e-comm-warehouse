@@ -15,7 +15,7 @@ etlRunning = False
 def index():
     return render_template('pages/index.html')
 
-@app.route('/startetl')
+@app.route('/startetl', methods=['POST'])
 def startetl(): 
     status = start_etl()
     return jsonify({'message': status}), 200
