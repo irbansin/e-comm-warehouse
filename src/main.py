@@ -3,6 +3,7 @@ import pandas as pd
 from flask import Flask, render_template, request, jsonify 
 import os
 
+from etl_orchestrator import start_etl
 from startetl import startETL
 
 
@@ -17,7 +18,7 @@ def index():
 
 @app.route('/startetl')
 def startetl(): 
-    status = startETL()
+    status = start_etl()
     return jsonify({'message': status}), 200
 
 if __name__ == '__main__':
