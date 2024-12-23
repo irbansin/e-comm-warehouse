@@ -6,7 +6,7 @@ A sample E-Commerce Warehouse System
 2. Aditya Singh Rathore
 3. Vinod Kanwar
 
-# ER Diagram
+# ER Diagram For Source Schema
 ```mermaid
 erDiagram
     Categories {
@@ -79,4 +79,53 @@ erDiagram
     Geolocation ||--o{ Customers: "located in"
     Geolocation ||--o{ Sellers: "located in"
 
+```
+
+# ER Diagram For OLAP Schema
+```mermaid
+erDiagram
+    SalesFact {
+        bigint sales_id PK
+        int customer_id FK
+        int product_id FK
+        int seller_id FK
+        int category_id FK
+        date time_id FK
+        numeric price
+        numeric freight_value
+        numeric payment_value
+    }
+    CustomersDim {
+        int customer_id PK
+        string customer_name
+        string customer_city
+        string customer_state
+    }
+    ProductsDim {
+        int product_id PK
+        string product_name
+        string product_category
+    }
+    SellersDim {
+        int seller_id PK
+        string seller_name
+        string seller_city
+        string seller_state
+    }
+    CategoriesDim {
+        int category_id PK
+        string category_name
+    }
+    TimeDim {
+        date time_id PK
+        int year
+        int month
+        int day
+    }
+
+    SalesFact ||--o{ CustomersDim : "belongs to"
+    SalesFact ||--o{ ProductsDim : "contains"
+    SalesFact ||--o{ SellersDim : "sold by"
+    SalesFact ||--o{ CategoriesDim : "categorized as"
+    SalesFact ||--o{ TimeDim : "occurred on"
 ```
