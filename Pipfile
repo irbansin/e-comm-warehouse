@@ -1,0 +1,26 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+mysql-connector-python = "*"
+sqlalchemy = "*"
+flask = "*"
+pandas = "*"
+openpyxl = "*"
+psycopg2-binary = "*"
+matplotlib = "*"
+seaborn = "*"
+numpy = "*"
+scipy = "*"
+scikit-learn = "*"
+boto3 = "*"
+redshift-connector = "*"
+kagglehub = "*"
+
+[dev-packages]
+ipykernel = "*"
+
+[requires]
+python_version = "3.10"
