@@ -1,3 +1,4 @@
+from dotenv import load_dotenv
 import redshift_connector
 from config import (
     REDSHIFT_HOST,
@@ -6,6 +7,11 @@ from config import (
     REDSHIFT_PASSWORD,
     REDSHIFT_PORT
 )
+
+load_dotenv()
+
+# AWS Configuration
+IAM_ARN = os.getenv("IAM_ARN")
 
 def copy_to_redshift(table_name, s3_file_path):
     """Copy data from S3 to Redshift table"""
@@ -22,7 +28,7 @@ def copy_to_redshift(table_name, s3_file_path):
         copy_query = f"""
         COPY {table_name}
         FROM '{s3_file_path}'
-        IAM_ROLE '<your_iam_role_arn>'
+        IAM_ROLE '{IAM_ARN}'
         CSV
         IGNOREHEADER 1;
         """
