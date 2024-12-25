@@ -1,4 +1,6 @@
 from dotenv import load_dotenv
+import os
+
 import redshift_connector
 from config import (
     REDSHIFT_HOST,
